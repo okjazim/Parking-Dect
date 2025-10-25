@@ -4,3 +4,48 @@ This project is a simple parking detection system built around the OX64. Periphe
 The system combines hardware interfacing and sensor data processing to provide a practical solution for automated parking management, utilizing the strengths of both the OX64 platform and the Raspberry Pi Pico 2 for enhanced control and flexibility.
 
 This setup is for demonstrating embedded system applications in real-world scenarios.
+
+## Features
+- Object detection using HC-SR04 ultrasonic sensor
+- Control and data processing on OX64 embedded platform
+- Peripheral integration with Raspberry Pi Pico 2
+- Simple wiring and hardware setup with jumper wires
+- Modular design for easy adaptation and extension
+
+## Hardware Components
+- OX64 
+- Raspberry Pi Pico 2
+- HC-SR04 ultrasonic sensor
+- Jumper wires for connections
+- Bread Board
+- Power supply from Personal Computer
+  
+## Software Components
+- Firmware for OX64 (OpenBouffalo)
+- Picoprobe for Pico
+- Build environment: Buildroot (version), toolchain details, etc.
+- WSL 2 (Windows Subsystem for Linux)
+- (not done)
+
+## Instructions
+1. Connect all the peripherals (Pico, Ox64,etc.) using jumper wires as per the wiring diagram in the docs folder.
+2. Flash the firmware for Pico.
+3. Build the firmware for OX64 using the provided setup folder.
+4. Flash the firmware onto a sd card on your PC.
+5. Insert the card on the OX64
+6. Power on the system and verify connections.
+(not done)
+
+## Usage
+in progress
+
+## Common Issues
+in progress
+
+## License
+in progress
+
+## Contribution
+in progress
+
+
