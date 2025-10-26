@@ -7,8 +7,7 @@ This document guides you through setting up the development environment for the 
 1. Open **PowerShell** as Administrator.  
 2. Run:
 '''bash
-wsl --install
-'''
+wsl --install'''
 3. Restart your system if prompted.  
 4. After reboot, open **Ubuntu** (or your chosen Linux distro) from the Start menu and complete the initial user setup.  
 5. Update your package list:
