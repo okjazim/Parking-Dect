@@ -45,7 +45,7 @@ This setup is for demonstrating embedded system applications in real-world scena
 ## Usage
 in progress
 
-## ScreenShots and Images
+## Screenshots and Images
 in progress
 
 ## Common Issues
