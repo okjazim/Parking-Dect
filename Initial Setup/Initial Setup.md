@@ -6,31 +6,33 @@ This document guides you through setting up the development environment for the 
 
 1. Open **PowerShell** as Administrator.  
 2. Run:
-'''bash
-wsl --install'''
+```bash
+wsl --install
+```
 3. Restart your system if prompted.  
 4. After reboot, open **Ubuntu** (or your chosen Linux distro) from the Start menu and complete the initial user setup.  
 5. Update your package list:
-'''bash
+```bash
 sudo apt update && sudo apt upgrade -y
-'''
+```
 
 ## 2. Install Development Dependencies
 
 Run the following in your WSL terminal:
-'''bash
+```bash
 sudo apt install -y git make gcc g++ libncurses5-dev libssl-dev bc wget unzip rsync cpio python3
-'''
+```
 
 These are required for compiling Buildroot and working with GNU toolchains.
 
 ## 3. Clone Buildroot Repository
 
 Clone the **Buildroot** source code (you can adjust version/tag as needed):
+```bash
 git clone https://git.busybox.net/buildroot
 cd buildroot
 git checkout 2025.11-git
-
+```
 text
 
 If using a specific stable release, adjust the tag accordingly.
