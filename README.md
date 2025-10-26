@@ -1,9 +1,6 @@
 # Parking-Dect (Work In Progress)
 
-<img src="https://github.com/user-attachments/assets/abe18117-b27a-4949-82f1-2026059f7eff"
-     alt="image"
-     style="width:300px; height:400px; clip-path: inset(20px 50px 40px 10px);">
-
+![Ox64_board](https://github.com/user-attachments/assets/95ccf921-083b-4a0c-8ff2-a3b6ef4544fe)
 
 This project is a simple parking detection system built around the OX64. Peripheral devices such as the Raspberry Pi Pico 2  and the HC-SR04 ultrasonic sensor helps accurately detect the presence of vehicles in parking spaces are what have been integrated. Jumper wires are used to establish reliable connections between these components, ensuring efficient communication and operation. 
 
