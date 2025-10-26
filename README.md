@@ -1,4 +1,4 @@
-# Parking-Dect (Work In Progress)
+# Parking Dectection System on OX64 (Work In Progress)
 
 ![Ox64_board](https://github.com/user-attachments/assets/95ccf921-083b-4a0c-8ff2-a3b6ef4544fe)
 
