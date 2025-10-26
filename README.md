@@ -32,6 +32,8 @@ This setup is for demonstrating embedded system applications in real-world scena
 - Terminal/Powershell
 - PuTTY
 
+Read [Initial Setup.md](https://github.com/okjazim/Parking-Dect/blob/main/Initial%20Setup/Initial_Setup.md) in the Initial Setup folder.
+
 ## Instructions
 1. Connect all the peripherals **(Pico, Ox64,etc.)** using **jumper wires** as per the wiring diagram in the [Diagrams](https://github.com/okjazim/Parking-Dect/blob/main/Diagrams/serial_connect.png) folder.
 2. Have them all attached on the **breadboard**.
