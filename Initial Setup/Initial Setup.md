@@ -1,4 +1,4 @@
-# Initial Setup Guide (WORK IN PROGRESS)
+# Initial Setup Guide (Work In Progress)
 
 This document guides you through setting up the development environment for the **Parking Detection System on OX64**, from installing WSL to building your first Buildroot image.
 
