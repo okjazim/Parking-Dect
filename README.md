@@ -29,14 +29,14 @@ This project demonstrates real-world embedded system concepts including sensor i
 
 # **Features**
 
-* 🚗 **Vehicle detection** using HC-SR04 ultrasonic sensor
-* 🔄 **Pico 2 → UART → OX64 communication pathway**
-* 🧠 OX64 processes distance values sent from Pico
-* 🖥️ Firmware and root filesystem built entirely from **Buildroot**
-* 📁 Minimalist project structure for easy onboarding
-* 🧪 Python utilities for LED control, motion tests, and debugging
-* 🛠 Bash scripts for auto-login and PuTTY / serial automation
-* 🔌 Clean modular wiring using jumper wires & breadboard
+* **Vehicle detection** using HC-SR04 ultrasonic sensor
+* **Pico 2 → UART → OX64 communication pathway**
+* OX64 processes distance values sent from Pico
+* Firmware and root filesystem built entirely from **Buildroot**
+* Minimalist project structure for easy onboarding
+* Python utilities for LED control, motion tests, and debugging
+* Bash scripts for auto-login and PuTTY / serial automation
+* Clean modular wiring using jumper wires & breadboard
 
 ---
 
@@ -107,7 +107,7 @@ Parking-Dect/
 # **Wiring Overview**
 
 Complete diagram is located in:
-📁 **`/Diagrams/serial_connect.png`**
+**`/Diagrams/serial_connect.png`**
 
 ### **Pico → HC-SR04**
 
