@@ -308,7 +308,5 @@ See [`LICENSE`](LICENSE) for details.
 
 # **References**
 
-* Buildroot Manual
-* [https://buildroot.org/downloads/manual/manual.html#requirement](https://buildroot.org/downloads/manual/manual.html#requirement)
-* OX64 Wiki
-* [https://wiki.pine64.org/wiki/Ox64](https://wiki.pine64.org/wiki/Ox64)
+* Buildroot Manual: [https://buildroot.org/downloads/manual/manual.html#requirement](https://buildroot.org/downloads/manual/manual.html#requirement)
+* OX64 Wiki: [https://wiki.pine64.org/wiki/Ox64](https://wiki.pine64.org/wiki/Ox64)
