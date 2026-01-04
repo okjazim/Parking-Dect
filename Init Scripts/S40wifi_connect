@@ -1,0 +1,16 @@
+#!/bin/sh
+# Short-description: Auto connect to Wi-Fi on boot
+
+SSID="Jazim"
+PASSWORD="jazim123456"
+
+echo "Connecting to Wi-Fi: $SSID..."
+
+#using BusyBox's blctl command (common on Ox64):
+if command -v blctl >/dev/null 2>&1; then
+    blctl connect_ap "$SSID" "$PASSWORD"
+    udhcpc -i bleth0
+fi
+
+echo "Wi-Fi connection script executed."
+exit 0
