@@ -16,7 +16,6 @@ This project demonstrates real-world embedded system concepts including sensor i
 - [Usage](#usage)
 - [Screenshots](#screenshots)
 - [File Structure](#file-structure)
-- [Enhancement Roadmap](#enhancement-roadmap)
 - [Contribution](#contribution)
 - [Important Note](#important-note)
 - [License](#license)
@@ -170,16 +169,16 @@ This directory typically contains:
 - Device Tree Blob (`.dtb`)
 - Root filesystem image (`rootfs.ext4` or similar)
 
-### 7. Flashing & Booting OX64
+### 7. Flashing
 
-*(This portion will be expanded as firmware flashing steps mature.)*
+Flash the built Buildroot image to the OX64 using balenaEtcher:
 
-Basic steps:
-
-1. Format SD card (FAT32)
-2. Copy Buildroot images into boot partition
-3. Insert card into OX64
-4. Connect via Pico UART → PuTTY (115200 baud)
+1. Download and install [balenaEtcher](https://www.balena.io/etcher/)
+2. Insert an SD card into your computer
+3. Open balenaEtcher and select the built image file (`output/images/sdcard.img`)
+4. Select your target SD card
+5. Click "Flash" and wait for the process to complete
+6. Safely eject the SD card and insert it into the OX64 board
 
 ---
 
@@ -229,25 +228,29 @@ The dark theme provides an eye-friendly alternative for low-light conditions or 
 
 ```
 Parking-Dect/
-├── Code/              # Python, Bash scripts, UART tools (WIP)
-├── Diagrams/          # Wiring diagrams, block diagrams
+├── assests/           # Screenshots and images for documentation
+│   ├── image.png          # Dark theme screenshot
+│   └── Screenshot (130).png # Light theme screenshot
+├── Code/              # Main application code
+│   ├── python_files/      # Python utilities and server
+│   │   ├── led_test.py        # LED testing utilities
+│   │   ├── listener.py        # Network listener for sensor data
+│   │   ├── motion.py          # Motion detection scripts
+│   │   └── parking_server.py # Main parking detection server
+│   └── webpage/          # Web interface files
+│       ├── index.html        # Main web page
+│       ├── script.js         # Frontend JavaScript
+│       └── styles.css        # CSS styling
+├── Diagrams/          # Wiring diagrams and documentation
+│   ├── Ox64_pinout.png   # OX64 board pinout diagram
+│   ├── pin_pic3.webp     # Additional pin diagrams
+│   └── serial_connect.png # Serial connection diagram
+├── Init Scripts/      # System initialization scripts
+│   ├── S40wifi_connect    # WiFi connection setup
+│   └── S50parking_server # Parking server startup
+├── LICENSE            # Project license file
 └── README.md          # Main documentation (this file)
 ```
-
----
-
-## Enhancement Roadmap
-
-Areas planned for development:
-
-* Parking detection logic implementation
-* Threshold calibration system
-* Enhanced Python-side utilities
-* Automated boot service
-* LED and indicator behavior
-* Data logging capabilities
-* Real-time notification system
-* Complete documentation for Python & Bash scripts
 
 ---
 
