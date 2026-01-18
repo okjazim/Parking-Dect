@@ -206,12 +206,12 @@ The system will display real-time parking slot occupancy data, with the HC-SR04 
 The system includes a responsive web interface that automatically opens in the default browser upon system startup. The web interface provides real-time monitoring and visualization of the parking detection system.
 
 ### Light Theme
-![Alt text](<Screenshot (130).png>)
+![Light Theme](assests/Screenshot%20(130).png)
 
 The light theme offers a clean, bright interface suitable for well-lit environments, displaying parking slot status, distance measurements, and system diagnostics.
 
 ### Dark Theme
-![Alt text](image.png)
+![Dark Theme](assests/image.png)
 
 The dark theme provides an eye-friendly alternative for low-light conditions or extended monitoring sessions, featuring the same comprehensive data display with reduced screen glare.
 
