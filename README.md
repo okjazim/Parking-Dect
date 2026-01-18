@@ -1,4 +1,4 @@
-# **Parking Dect (Work In Progress)**
+# **Parking Dect**
 
 ![Ox64\_board](https://github.com/user-attachments/assets/95ccf921-083b-4a0c-8ff2-a3b6ef4544fe)
 
@@ -14,7 +14,7 @@ This project demonstrates real-world embedded system concepts including sensor i
 - [Features](#features)
 - [Setup Instructions](#setup-instructions)
 - [Usage](#usage)
-- [Screenshots / Video Demo](#screenshots--video-demo)
+- [Screenshots](#screenshots)
 - [File Structure](#file-structure)
 - [Enhancement Roadmap](#enhancement-roadmap)
 - [Contribution](#contribution)
@@ -56,28 +56,39 @@ This project demonstrates real-world embedded system concepts including sensor i
 
 ## Setup Instructions
 
+This guide walks you through setting up the development environment for the **Parking Detection System on OX64**, from installing WSL to building your first Buildroot image.
+
 ### 1. Install WSL (Windows Subsystem for Linux)
 
-Check virtualization:
+Before installation, make sure your system meets these requirements:
+- OS: Windows 10 (version 21H2+) or Windows 11 (recommended)
+- Virtualization: Must be enabled in BIOS/UEFI
+- PowerShell Access: Run commands as Administrator
 
-```powershell
+Open PowerShell as Administrator, then verify virtualization:
+
+```bash
 systeminfo | find "Virtualization"
 ```
 
-Enable features:
+If virtualization or WSL are not enabled, run this in PowerShell:
 
-```powershell
+```bash
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
 
-Install Ubuntu 24.04:
+Reboot your system if prompted.
 
-```powershell
+Then install Ubuntu 24.04 with:
+
+```bash
 wsl --install -d Ubuntu-24.04
 ```
 
-Update environment:
+Restart your system again if needed.
+
+After reboot, launch Ubuntu from Start Menu, create your UNIX username and password, and update packages:
 
 ```bash
 sudo apt update && sudo apt upgrade -y
@@ -85,58 +96,81 @@ sudo apt update && sudo apt upgrade -y
 
 ### 2. Install Development Dependencies
 
-```
-sudo apt install -y which sed make binutils build-essential diffutils gcc g++ bash patch \
-gzip bzip2 perl tar cpio unzip rsync file bc findutils gawk wget python3 \
-libncurses5-dev libncurses-dev qtbase5-dev libglib2.0-dev libgtk2.0-dev \
-libglade2-dev git bzr curl cvs mercurial subversion default-jdk asciidoc \
-w3m dblatex graphviz python3-matplotlib python3-aiohttp
+Install all required packages for Buildroot and development:
+
+```bash
+sudo apt install -y which sed make binutils build-essential diffutils gcc g++ bash patch gzip bzip2 perl tar cpio unzip rsync file bc findutils gawk wget python3 libncurses5-dev libncurses-dev qtbase5-dev libglib2.0-dev libgtk2.0-dev libglade2-dev git bzr curl cvs mercurial subversion default-jdk asciidoc w3m dblatex graphviz python3-matplotlib python3-aiohttp
 ```
 
-### 3. Clone Repositories
+### 3. Clone Buildroot Repositories
 
-```
+Create a workspace and clone Buildroot and Bouffalo repositories:
+
+```bash
 mkdir -p ~/ox64
 cd ~/ox64
 git clone https://github.com/buildroot/buildroot
 git clone https://github.com/openbouffalo/buildroot_bouffalo
 ```
 
-### 4. Configure Buildroot
+### 4. Configure Buildroot for OX64
 
-Use provided OX64 defconfig:
+Use the provided defconfig or create your own configuration:
 
-```
+```bash
 make ox64_defconfig
 ```
 
-For a custom config:
+If you have a custom configuration file:
 
-```
+```bash
 make configs/ox64_custom_defconfig
 ```
 
-Interactive configuration:
+To adjust options via the interactive menu:
 
-```
+```bash
 make menuconfig
 ```
 
-### 5. Build Image
+Here you can:
+- Enable or disable specific packages
+- Choose the toolchain or compiler options
+- Modify root filesystem contents
 
-```
+### 5. Build the Image
+
+Run:
+
+```bash
 make
 ```
 
-If issues occur:
+Buildroot will automatically download, extract, compile, and assemble the entire embedded Linux system for the OX64 board. Compilation may take several minutes depending on your hardware.
 
-```
+If you encounter errors, verify toolchain accessibility:
+
+```bash
 echo $PATH
 which make
 which gcc
 ```
 
-### 6. Flashing & Booting OX64
+### 6. Locate Build Output
+
+Once complete, the build artifacts will be found in:
+
+```
+output/images/
+```
+
+This directory typically contains:
+- Bootloader binaries
+- Kernel image (`Image` or `zImage`)
+- Device Tree Blob (`.dtb`)
+- Root filesystem image (`rootfs.ext4` or similar)
+
+### 7. Flashing & Booting OX64
 
 *(This portion will be expanded as firmware flashing steps mature.)*
 
@@ -151,26 +185,44 @@ Basic steps:
 
 ## Usage
 
-*(Work in progress — final usage instructions will be added as software stabilizes.)*
+To use the Parking Detection System:
 
-Current expectations:
+1. **Start the listener script**: Run `listener.py` in the background on your laptop/PC that is connected to the same network as the OX64 board.
 
-* Pico gathers distance
-* Pico sends UART stream:
+2. **Connect via PuTTY**: Open PuTTY and connect with the correct baud rate (115200) and COM port assigned to the OX64 (you can check the assigned COM port using Device Manager).
 
-  ```
-  DIST: 23.4cm
-  DIST: 24.1cm
-  ```
-* OX64 receives and interprets
-* Python utilities test LEDs, motion, etc.
+3. **Automatic boot sequence**: The initialization scripts will automatically run during the OX64 boot sequence.
+
+4. **Access the web interface**: The webpage will automatically open in your default browser, providing a graphical interface for monitoring the parking detection system.
+
+The system will display real-time parking slot occupancy data, with the HC-SR04 ultrasonic sensor measuring distances and the Pico 2 relaying data to the OX64 for processing.
 
 ---
 
-## Screenshots / Video Demo
+## Screenshots
 
-*To be added - Include screenshots of the hardware setup, serial output, and video demonstrations.*
+### Web Interface Overview
 
+The system includes a responsive web interface that automatically opens in the default browser upon system startup. The web interface provides real-time monitoring and visualization of the parking detection system.
+
+### Light Theme
+![Alt text](<Screenshot (130).png>)
+
+The light theme offers a clean, bright interface suitable for well-lit environments, displaying parking slot status, distance measurements, and system diagnostics.
+
+### Dark Theme
+![Alt text](image.png)
+
+The dark theme provides an eye-friendly alternative for low-light conditions or extended monitoring sessions, featuring the same comprehensive data display with reduced screen glare.
+
+### Frontend Features
+
+- **Real-time Status Display**: Live parking slot occupancy indicators
+- **Distance Measurements**: Continuous ultrasonic sensor readings from HC-SR04
+- **Theme Switching**: Automatic or manual light/dark theme selection
+- **Responsive Design**: Optimized for various screen sizes and devices
+- **System Diagnostics**: Connection status and sensor health monitoring
+- **Historical Data**: Optional logging and trend visualization
 ---
 
 ## File Structure
@@ -179,7 +231,6 @@ Current expectations:
 Parking-Dect/
 ├── Code/              # Python, Bash scripts, UART tools (WIP)
 ├── Diagrams/          # Wiring diagrams, block diagrams
-├── Initial Setup/     # WSL, Buildroot, environment preparation
 └── README.md          # Main documentation (this file)
 ```
 
