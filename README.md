@@ -188,7 +188,7 @@ To use the Parking Detection System:
 
 1. **Start the listener script**: Run `listener.py` in the background on your laptop/PC that is connected to the same network as the OX64 board.
 
-2. **Connect via PuTTY**: Open PuTTY and connect with the correct baud rate (115200) and COM port assigned to the OX64 (you can check the assigned COM port using Device Manager).
+2. **Connect via PuTTY**: Open PuTTY and connect with the correct baud rate (2000000) and COM port assigned to the OX64 (you can check the assigned COM port using Device Manager).
 
 3. **Automatic boot sequence**: The initialization scripts will automatically run during the OX64 boot sequence.
 
@@ -256,7 +256,42 @@ Parking-Dect/
 
 ## Contribution
 
-*To be added - Include contribution guidelines, coding standards, and how to submit pull requests.*
+We welcome contributions to the Parking Detection System! Here's how you can help:
+
+### Getting Started
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature-name`
+3. Make your changes
+4. Test your changes thoroughly
+5. Commit your changes: `git commit -m 'Add some feature'`
+6. Push to the branch: `git push origin feature/your-feature-name`
+7. Submit a pull request
+
+### Development Guidelines
+
+- **Code Style**: Follow PEP 8 for Python code and consistent formatting for other languages
+- **Documentation**: Update documentation for any new features or changes
+- **Testing**: Test your changes on actual hardware when possible
+- **Commits**: Write clear, descriptive commit messages
+
+### Pull Request Process
+
+1. Update the README.md with details of changes if needed
+2. Ensure all tests pass and code lints without errors
+3. Request review from maintainers
+4. Address any feedback from reviewers
+
+### Reporting Issues
+
+- Use GitHub Issues to report bugs
+- Include detailed steps to reproduce the issue
+- Provide system information and hardware details
+- Suggest potential solutions if possible
+
+### Code of Conduct
+
+Please be respectful and constructive in all interactions. We aim to foster an inclusive and welcoming community.
 
 ---
 
