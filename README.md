@@ -8,26 +8,40 @@ This project demonstrates real-world embedded system concepts including sensor i
 
 ---
 
-# **Table of Contents**
+## Table of Contents
 
-* [Features](#features)
-* [Project Structure](#project-structure)
-* [System Architecture](#system-architecture)
-* [Hardware Components](#hardware-components)
-* [Software Components](#software-components)
-* [Wiring Overview](#wiring-overview)
-* [Initial Setup (WSL + Buildroot)](#initial-setup-wsl--buildroot)
-* [Buildroot Configuration & Image Build](#buildroot-configuration--image-build)
-* [Flashing & Booting OX64](#flashing--booting-ox64)
-* [Usage](#usage)
-* [Work In Progress Notes](#work-in-progress-notes)
-* [Common Issues](#common-issues)
-* [License](#license)
-* [References](#references)
+- [Tech Stack](#tech-stack)
+- [Features](#features)
+- [Setup Instructions](#setup-instructions)
+- [Usage](#usage)
+- [Screenshots / Video Demo](#screenshots--video-demo)
+- [File Structure](#file-structure)
+- [Enhancement Roadmap](#enhancement-roadmap)
+- [Contribution](#contribution)
+- [Important Note](#important-note)
+- [License](#license)
+- [References](#references)
 
 ---
 
-# **Features**
+## Tech Stack
+
+### Hardware
+- **OX64 board** - Main processing unit
+- **Raspberry Pi Pico 2** - UART sensor interface
+- **HC-SR04 Ultrasonic Sensor** - Vehicle detection
+- Breadboard and jumper wires for prototyping
+
+### Software
+- **Buildroot Linux system** - Embedded Linux distribution for OX64
+- **OpenBouffalo** - Firmware development tools
+- **Python** - Utilities for LED control, motion tests, and debugging
+- **Bash scripts** - Buildroot automation and serial session handling
+- **WSL 2 (Ubuntu 24.04)** - Development environment
+
+---
+
+## Features
 
 * **Vehicle detection** using HC-SR04 ultrasonic sensor
 * **Pico 2 → UART → OX64 communication pathway**
@@ -40,99 +54,9 @@ This project demonstrates real-world embedded system concepts including sensor i
 
 ---
 
-# **Project Structure**
+## Setup Instructions
 
-```
-Parking-Dect/
-├── Code/              # Python, Bash scripts, UART tools (WIP)
-├── Diagrams/          # Wiring diagrams, block diagrams
-├── Initial Setup/     # WSL, Buildroot, environment preparation
-└── README.md          # Main documentation (this file)
-```
-
----
-
-# **System Architecture**
-
-```
-        USB                     UART                       GPIO
-+------------------+   +-----------------------+   +---------------------------+
-|     PC Host      |   | Raspberry Pi Pico 2   |   | HC-SR04 Ultrasonic Sensor |
-| (WSL Buildroot)  |   | (UART Sensor Bridge)  |   +---------------------------+
-+------------------+   | - Reads HC-SR04       |
-                       | - Computes distance   |
-                       | - Sends data to OX64  |
-                       +-----------v-----------+
-                                   | UART
-                                   v
-                           +------------------+
-                           |      OX64        |
-                           | Parses distance  |
-                           | Parking logic    |
-                           +------------------+
-```
-
-### **Sensor Flow**
-
-1. Pico triggers HC-SR04
-2. Pico measures echo and computes distance
-3. Pico sends formatted data over UART → OX64
-4. OX64 interprets distance → determines occupancy
-
----
-
-# **Hardware Components**
-
-* **OX64 board**
-* **Raspberry Pi Pico 2** (used *exclusively* as a UART + sensor interface)
-* **HC-SR04 Ultrasonic Sensor**
-* Breadboard
-* Jumper wires
-* Micro-USB to USB-C adapter
-* PC for flashing & serial monitoring
-
----
-
-# **Software Components**
-
-* **Buildroot Linux system** for OX64
-* **OpenBouffalo** tooling
-* **Pico firmware** as UART sensor adapter (Picoprobe or custom Python/C firmware)
-* **Python utilities** for LED control, motion simulation, and debugging
-* **Bash scripts** for Buildroot automation and PuTTY serial session handling
-* Environment built under **WSL 2 (Ubuntu 24.04)**
-
----
-
-# **Wiring Overview**
-
-Complete diagram is located in:
-**`/Diagrams/serial_connect.png`**
-
-### **Pico → HC-SR04**
-
-```
-Pico GPIO (Trigger) → HC-SR04 TRIG
-Pico GPIO (Echo)    → HC-SR04 ECHO
-Pico 5V / VBUS      → HC-SR04 VCC
-Pico GND            → HC-SR04 GND
-```
-
-### **Pico UART → OX64**
-
-```
-Pico TX → OX64 RX
-Pico RX → OX64 TX
-GND     → GND
-```
-
----
-
-# **Initial Setup (WSL + Buildroot)**
-
-*(This section incorporates content from `Initial_Setup.md`.)*
-
-## **1. Install WSL (Windows Subsystem for Linux)**
+### 1. Install WSL (Windows Subsystem for Linux)
 
 Check virtualization:
 
@@ -159,9 +83,7 @@ Update environment:
 sudo apt update && sudo apt upgrade -y
 ```
 
----
-
-## **2. Install Development Dependencies**
+### 2. Install Development Dependencies
 
 ```
 sudo apt install -y which sed make binutils build-essential diffutils gcc g++ bash patch \
@@ -171,9 +93,7 @@ libglade2-dev git bzr curl cvs mercurial subversion default-jdk asciidoc \
 w3m dblatex graphviz python3-matplotlib python3-aiohttp
 ```
 
----
-
-## **3. Clone Repositories**
+### 3. Clone Repositories
 
 ```
 mkdir -p ~/ox64
@@ -182,11 +102,7 @@ git clone https://github.com/buildroot/buildroot
 git clone https://github.com/openbouffalo/buildroot_bouffalo
 ```
 
----
-
-# **Buildroot Configuration & Image Build**
-
-## **5. Configure Buildroot**
+### 4. Configure Buildroot
 
 Use provided OX64 defconfig:
 
@@ -206,9 +122,7 @@ Interactive configuration:
 make menuconfig
 ```
 
----
-
-## **6. Build Image**
+### 5. Build Image
 
 ```
 make
@@ -222,26 +136,7 @@ which make
 which gcc
 ```
 
----
-
-## **7. Build Output Location**
-
-Build artifacts:
-
-```
-output/images/
-```
-
-Includes:
-
-* Bootloaders
-* Kernel (`Image`)
-* DTB
-* Root filesystem (`rootfs.ext4`, etc.)
-
----
-
-# **Flashing & Booting OX64**
+### 6. Flashing & Booting OX64
 
 *(This portion will be expanded as firmware flashing steps mature.)*
 
@@ -254,7 +149,7 @@ Basic steps:
 
 ---
 
-# **Usage**
+## Usage
 
 *(Work in progress — final usage instructions will be added as software stabilizes.)*
 
@@ -272,22 +167,48 @@ Current expectations:
 
 ---
 
-# **Work In Progress Notes**
+## Screenshots / Video Demo
 
-Areas still under development:
-
-* Parking detection logic
-* Threshold calibration
-* Python-side utilities
-* Automated boot service
-* LED and indicator behavior
-* Data logging
-* Real-time notification system
-* Documentation for Python & Bash scripts
+*To be added - Include screenshots of the hardware setup, serial output, and video demonstrations.*
 
 ---
 
-# **Common Issues**
+## File Structure
+
+```
+Parking-Dect/
+├── Code/              # Python, Bash scripts, UART tools (WIP)
+├── Diagrams/          # Wiring diagrams, block diagrams
+├── Initial Setup/     # WSL, Buildroot, environment preparation
+└── README.md          # Main documentation (this file)
+```
+
+---
+
+## Enhancement Roadmap
+
+Areas planned for development:
+
+* Parking detection logic implementation
+* Threshold calibration system
+* Enhanced Python-side utilities
+* Automated boot service
+* LED and indicator behavior
+* Data logging capabilities
+* Real-time notification system
+* Complete documentation for Python & Bash scripts
+
+---
+
+## Contribution
+
+*To be added - Include contribution guidelines, coding standards, and how to submit pull requests.*
+
+---
+
+## Important Note
+
+### Common Issues
 
 | Problem                    | Likely Cause            | Fix                                     |
 | -------------------------- | ----------------------- | --------------------------------------- |
@@ -297,16 +218,65 @@ Areas still under development:
 | HC-SR04 unstable           | Power noise             | Ensure stable 5V and proper ground      |
 | Buildroot errors           | Missing packages        | Reinstall dependencies                  |
 
+### System Architecture
+
+```
+        USB                     UART                       GPIO
++------------------+   +-----------------------+   +---------------------------+
+|     PC Host      |   | Raspberry Pi Pico 2   |   | HC-SR04 Ultrasonic Sensor |
+| (WSL Buildroot)  |   | (UART Sensor Bridge)  |   +---------------------------+
++------------------+   | - Reads HC-SR04       |
+                       | - Computes distance   |
+                       | - Sends data to OX64  |
+                       +-----------v-----------+
+                                   | UART
+                                   v
+                           +------------------+
+                           |      OX64        |
+                           | Parses distance  |
+                           | Parking logic    |
+                           +------------------+
+```
+
+### Sensor Flow
+
+1. Pico triggers HC-SR04
+2. Pico measures echo and computes distance
+3. Pico sends formatted data over UART → OX64
+4. OX64 interprets distance → determines occupancy
+
+### Wiring Overview
+
+Complete diagram is located in:
+**`/Diagrams/serial_connect.png`**
+
+#### Pico → HC-SR04
+
+```
+Pico GPIO (Trigger) → HC-SR04 TRIG
+Pico GPIO (Echo)    → HC-SR04 ECHO
+Pico 5V / VBUS      → HC-SR04 VCC
+Pico GND            → HC-SR04 GND
+```
+
+#### Pico UART → OX64
+
+```
+Pico TX → OX64 RX
+Pico RX → OX64 TX
+GND     → GND
+```
+
 ---
 
-# **License**
+## License
 
 This project is licensed under the **MIT License**.
 See [`LICENSE`](LICENSE) for details.
 
 ---
 
-# **References**
+## References
 
 * Buildroot Manual: [https://buildroot.org/downloads/manual/manual.html#requirement](https://buildroot.org/downloads/manual/manual.html#requirement)
 * OX64 Wiki: [https://wiki.pine64.org/wiki/Ox64](https://wiki.pine64.org/wiki/Ox64)
